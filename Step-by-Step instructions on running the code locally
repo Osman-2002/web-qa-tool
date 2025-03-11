@@ -1,0 +1,88 @@
+Web Q&A Tool - Instructions to Run Locally
+
+This document provides step-by-step instructions to set up and run the Web Q&A Tool on your local machine.
+
+---
+
+Prerequisites
+- Python 3.x installed (download from python.org if needed).
+- Git installed (download from git-scm.com if needed).
+- An OpenAI API key (sign up at platform.openai.com to get one).
+
+---
+
+Step 1: Clone the Repository
+1. Open a terminal or command prompt.
+2. Run the following command to clone the repository (replace 'yourusername' with your GitHub username):
+   git clone https://github.com/yourusername/web-qa-tool.git
+3. Navigate into the project directory:
+   cd web-qa-tool
+
+---
+
+Step 2: Install Dependencies
+1. Ensure you have pip (Python's package manager) installed. It comes with Python 3.x by default.
+2. Install the required Python libraries by running:
+   pip install flask requests beautifulsoup4 openai
+   This installs:
+   - Flask: For the web server.
+   - Requests: To fetch URL content.
+   - BeautifulSoup4: To scrape text from web pages.
+   - OpenAI: To interact with the OpenAI API.
+
+---
+
+Step 3: Set Up Your OpenAI API Key
+1. Obtain your OpenAI API key from platform.openai.com (under API keys section).
+2. Set the API key as an environment variable:
+   - On Linux/Mac:
+     export OPENAI_API_KEY="your-api-key"
+   - On Windows (Command Prompt):
+     set OPENAI_API_KEY=your-api-key
+   Replace "your-api-key" with your actual OpenAI API key.
+   Note: This must be done in the same terminal session before running the app, or add it to your system environment variables for persistence.
+
+---
+
+Step 4: Run the Application
+1. In the terminal, from the 'web-qa-tool' directory, start the Flask app:
+   python app.py
+2. You should see output indicating the server is running, like:
+   * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+
+---
+
+Step 5: Access the Tool
+1. Open a web browser (e.g., Chrome, Firefox).
+2. Go to the following URL:
+   http://127.0.0.1:5000
+3. The Web Q&A Tool interface should load.
+
+---
+
+Step 6: Use the Tool
+1. Ingest URLs:
+   - Enter one or more URLs in the textarea, separated by commas (e.g., https://example.com, https://example.org).
+   - Click "Ingest URLs" and wait for a confirmation message (e.g., "Ingested X sentences").
+2. Ask a Question:
+   - Type a question in the input field (e.g., "What is the main topic?").
+   - Click "Ask" to see the answer based solely on the ingested content.
+
+---
+
+Troubleshooting
+- If you get "pip not found":
+  - Ensure Python is added to your PATH. Reinstall Python if needed, checking "Add Python to PATH" during installation.
+- If the server doesn’t start:
+  - Check for typos in 'python app.py' or ensure you’re in the correct directory.
+- If you see "Error calling OpenAI API":
+  - Verify your API key is set correctly and has credits.
+  - Check your internet connection.
+- If the page doesn’t load:
+  - Ensure the server is running and you’re using http://127.0.0.1:5000.
+
+---
+
+Notes
+- The tool uses OpenAI's gpt-3.5-turbo model, which has a 16,385-token limit. Large contexts are truncated to fit.Or you can just use a different model like gpt-4o.
+- For persistent API key setup, add it to your system environment variables instead of setting it each time.
