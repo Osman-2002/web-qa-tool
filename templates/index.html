@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Web Q&A Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Web Q&A Tool</h1>
+        <div class="section">
+            <label for="urls">Enter URLs (comma-separated):</label>
+            <textarea id="urls" placeholder="https://example.com, https://example.org"></textarea>
+            <button onclick="ingest()">Ingest URLs</button>
+            <p id="ingest-status"></p>
+        </div>
+        <div class="section">
+            <label for="question">Ask a Question:</label>
+            <input type="text" id="question" placeholder="What is...">
+            <button onclick="ask()">Ask</button>
+            <p id="answer"></p>
+        </div>
+    </div>
+
+    <script>
+        function ingest() {
+            const urls = $('#urls').val();
+            $.ajax({
+                url: '/ingest',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ urls: urls }),
+                success: function(response) {
+                    $('#ingest-status').text(response.message);
+                },
+                error: function() {
+                    $('#ingest-status').text('Error ingesting URLs.');
+                }
+            });
+        }
+
+        function ask() {
+            const question = $('#question').val();
+            $.ajax({
+                url: '/ask',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ question: question }),
+                success: function(response) {
+                    $('#answer').text(response.answer);
+                },
+                error: function() {
+                    $('#answer').text('Error processing question.');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
